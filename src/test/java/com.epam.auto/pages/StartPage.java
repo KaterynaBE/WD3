@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Created by ekaterinabut on 10/31/15.
+ * 'Start' page elements and methods.
  */
 public class StartPage {
 

@@ -6,6 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * 'Home' page elements and methods.
+ */
+
 public class HomePage {
 
     @FindBy(className = "z0")
@@ -26,9 +30,20 @@ public class HomePage {
     @FindBy(className="UI")
     private WebElement listOfEmails;
 
-    @FindBy(xpath="//div[@area-label='Report spam']")
+    @FindBy(xpath="//div[@aria-label='Report spam']")
     private WebElement buttonReportSpam;
 
+    @FindBy(className="gb_Qa")
+    private WebElement expanderAccound;
+
+    @FindBy(xpath="//a[text()='Sign out']")
+    private WebElement buttonSignOut;
+
+    @FindBy(className="ait")
+    private WebElement expanderMoreLess;
+
+    @FindBy(className="J-Ke n0 aBU")
+    private WebElement linkSpam;
 
     private WebDriver driver;
 
@@ -44,8 +59,18 @@ public class HomePage {
         buttonSend.click();
     }
 
+    public void signOut() {
+        expanderAccound.click();
+        buttonSignOut.click();
+    }
+
     public void reportSpam() {
         listOfEmails.click();
         buttonReportSpam.click();
+    }
+
+    public void openSpamFolder() {
+        expanderMoreLess.click();
+        linkSpam.click();
     }
 }

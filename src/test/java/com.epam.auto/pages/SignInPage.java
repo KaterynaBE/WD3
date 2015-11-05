@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- * Created by ekaterinabut on 11/1/15.
+ * 'Sign in' page elements and methods.
  */
 public class SignInPage {
 
@@ -23,8 +23,8 @@ public class SignInPage {
     @FindBy(id="signIn")
     private WebElement buttonSignIn;
 
-//    @FindBy(id="PersistentCookie");
-//    private WebElement staySignedInCheckbox;
+    @FindBy(id="PersistentCookie")
+    private WebElement checkboxStaySigned;
 
     private WebDriver driver;
 
@@ -37,7 +37,12 @@ public class SignInPage {
         inputEmail.sendKeys(email);
         buttonNext.click();
         inputPassword.sendKeys(password);
+        // making sure that Stay Signed in checkbox is not ticked - for easier switching accounts.
+        if (checkboxStaySigned.isSelected()) {
+            checkboxStaySigned.click();
+        }
         buttonSignIn.click();
         return new HomePage(driver);
     }
+
 }
