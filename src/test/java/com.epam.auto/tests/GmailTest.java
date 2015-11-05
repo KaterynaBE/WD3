@@ -22,6 +22,7 @@ import org.openqa.selenium.Alert;
  * 8. Go to folder: Spam"
  * 9. Check that the letter from user1 in Spam
  */
+
 public class GmailTest {
     private final String USERNAME1 = "testtasktask";
     private final String PASSWORD1 = "testtasktaskpwd";

@@ -5,9 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+
 /**
  * 'Start' page elements and methods.
  */
+
 public class StartPage {
 
     @FindBy(id = "gmail-sign-in")
@@ -29,15 +31,4 @@ public class StartPage {
         buttonSignIn.click();
         return new SignInPage(driver);
     }
-
-//    private WebDriver driver;
-//
-//    public void clickSignInButton() {
-//        signInButton.click();
-//    }
-//
-//    public StartPage(WebDriver driver) {
-//        this.driver = driver;
-//        PageFactory.initElements(driver, this);
-//    }
 }
