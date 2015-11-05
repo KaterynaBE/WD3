@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * 'Home' page elements and methods.
  */
-
 public class HomePage {
 
     @FindBy(className = "z0")

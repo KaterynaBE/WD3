@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * 'Start' page elements and methods.
  */
-
 public class StartPage {
 
     @FindBy(id = "gmail-sign-in")

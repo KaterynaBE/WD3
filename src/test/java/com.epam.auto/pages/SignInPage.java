@@ -9,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 /**
  * 'Sign in' page elements and methods.
  */
-
 public class SignInPage {
 
     @FindBy(id = "Email")
