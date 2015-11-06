@@ -1,7 +1,18 @@
 package com.epam.auto.pages;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
+
 /**
- * Created by ekaterinabut on 11/6/15.
+ * 'Spam' page elements and methods..
  */
+
 public class SpamPage {
+
+    private WebDriver driver;
+
+    public SpamPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 }

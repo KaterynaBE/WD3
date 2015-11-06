@@ -40,9 +40,10 @@ public class InboxPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void signOut() {
+    public SignInPage signOut() {
         expanderAccound.click();
         buttonSignOut.click();
+        return new SignInPage(driver);
     }
 
     public void reportSpam() {
@@ -50,8 +51,9 @@ public class InboxPage {
         buttonReportSpam.click();
     }
 
-    public void openSpamFolder() {
+    public SpamPage openSpamFolder() {
         expanderMoreLess.click();
         linkSpam.click();
+        return new SpamPage(driver);
     }
 }
