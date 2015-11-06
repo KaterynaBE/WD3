@@ -10,22 +10,10 @@ import org.openqa.selenium.support.PageFactory;
  * 'Home' page elements and methods.
  */
 
-public class HomePage {
+public class InboxPage {
 
     @FindBy(className = "z0")
-    private WebElement buttonCompose;
-
-    @FindBy(id =":9o")
-    private WebElement textareaEmail;
-
-    @FindBy(xpath="//textarea[@name='to']")
-    private WebElement textareaTo;
-
-    @FindBy(xpath="//input[@name='subjectbox']")
-    private WebElement textareaSubjectbox;
-
-    @FindBy(xpath="//div[text()='Send']")
-    private WebElement buttonSend;
+    protected static WebElement buttonCompose;
 
     @FindBy(className="UI")
     private WebElement listOfEmails;
@@ -47,16 +35,9 @@ public class HomePage {
 
     private WebDriver driver;
 
-    public HomePage(WebDriver driver) {
+    public InboxPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-    }
-
-    public void sendEmail(String to, String subject) {
-        buttonCompose.click();
-        textareaTo.sendKeys(to);
-        textareaSubjectbox.sendKeys(subject);
-        buttonSend.click();
     }
 
     public void signOut() {

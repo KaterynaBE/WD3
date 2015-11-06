@@ -34,7 +34,7 @@ public class SignInPage {
         PageFactory.initElements(driver, this);
     }
 
-    public HomePage signIn(String email, String password) {
+    public InboxPage signIn(String email, String password) {
         inputEmail.sendKeys(email);
         buttonNext.click();
         inputPassword.sendKeys(password);
@@ -43,7 +43,7 @@ public class SignInPage {
             checkboxStaySigned.click();
         }
         buttonSignIn.click();
-        return new HomePage(driver);
+        return new InboxPage(driver);
     }
 
 }

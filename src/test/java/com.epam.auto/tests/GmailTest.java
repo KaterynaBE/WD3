@@ -1,13 +1,18 @@
 package com.epam.auto.tests;
 
+import com.epam.auto.pages.NewMessagePopup;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import com.epam.auto.pages.SignInPage;
 import com.epam.auto.pages.StartPage;
-import com.epam.auto.pages.HomePage;
+import com.epam.auto.pages.InboxPage;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By;
 
 
 /**
@@ -37,28 +42,28 @@ public class GmailTest {
         startPage.open();
         SignInPage signInPage = new SignInPage(driver);
         // 1, 2
-        HomePage homePage = signInPage.signIn(USERNAME1, PASSWORD1);
-        homePage.sendEmail(USERNAME2, "title");
-        homePage.signOut();
+        InboxPage inboxPage = signInPage.signIn(USERNAME1, PASSWORD1);
+        NewMessagePopup newMessage = new NewMessagePopup(driver);
+        newMessage.sendEmail(USERNAME2, "title");
+        inboxPage.signOut();
 
         // Accepting alert shown
-        // TODO: Add condition: if alert is shown - accept it (as it's not always appears, but on most cases)
         Alert alert = driver.switchTo().alert();
         alert.accept();
 
         // 3, 4
-        signInPage.signIn(USERNAME2, PASSWORD2);
-        homePage.reportSpam();
+        inboxPage = signInPage.signIn(USERNAME2, PASSWORD2);
+        inboxPage.reportSpam();
 
         // 5, 6
-        homePage.signOut();
+        inboxPage.signOut();
         signInPage.signIn(USERNAME1, PASSWORD1);
-        homePage.sendEmail(USERNAME2, "title");
+        newMessage.sendEmail(USERNAME2, "title");
 
         // 7, 8
-        homePage.signOut();
+        inboxPage.signOut();
         signInPage.signIn(USERNAME2, PASSWORD2);
-        homePage.openSpamFolder();
+        inboxPage.openSpamFolder();
 
         // TODO 9. Easiest way is just check that text is present on page (email title on our case)
 
