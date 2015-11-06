@@ -3,16 +3,12 @@ package com.epam.auto.tests;
 import com.epam.auto.pages.NewMessagePopup;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import com.epam.auto.pages.SignInPage;
 import com.epam.auto.pages.StartPage;
 import com.epam.auto.pages.InboxPage;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.By;
 
 
 /**
@@ -33,6 +29,7 @@ public class GmailTest {
     private final String PASSWORD1 = "testtasktaskpwd";
     private final String USERNAME2 = "testtasktask2@gmail.com";
     private final String PASSWORD2 = "testtasktaskpwd2";
+    private final String EMAIL_TITLE = "Email title";
 
     @Test
     public void testSentGmail() {
@@ -44,28 +41,36 @@ public class GmailTest {
         // 1, 2
         InboxPage inboxPage = signInPage.signIn(USERNAME1, PASSWORD1);
         NewMessagePopup newMessage = new NewMessagePopup(driver);
-        newMessage.sendEmail(USERNAME2, "title");
+        newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
         inboxPage.signOut();
 
-        // Accepting alert shown
+        // Accepting alert shown. Sometimes (seldom) it's not shown which causes. It's not connected to butter bar
+        // display as I thought earlier - so wait for element to b displayed will not help. Condition if it's displayed
+        // - click , otherwise - go further should help.
+        // TODO (in case I'll still need it) -> move accept alert to base page as it's created.
         Alert alert = driver.switchTo().alert();
         alert.accept();
 
         // 3, 4
         inboxPage = signInPage.signIn(USERNAME2, PASSWORD2);
         inboxPage.reportSpam();
+        inboxPage.closeContextDialog();
 
         // 5, 6
         inboxPage.signOut();
         signInPage.signIn(USERNAME1, PASSWORD1);
-        newMessage.sendEmail(USERNAME2, "title");
+        newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
 
         // 7, 8
         inboxPage.signOut();
+        driver.switchTo().alert();
+        alert.accept();
+
         signInPage.signIn(USERNAME2, PASSWORD2);
         inboxPage.openSpamFolder();
 
-        // TODO 9. Easiest way is just check that text is present on page (email title on our case)
+        // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
+        driver.getPageSource().contains(EMAIL_TITLE);
 
         driver.quit();
     }

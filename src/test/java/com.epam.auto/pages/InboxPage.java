@@ -30,8 +30,12 @@ public class InboxPage {
     @FindBy(className="ait")
     private WebElement expanderMoreLess;
 
-    @FindBy(className="J-Ke n0 aBU")
+    //@FindBy(xpath="//span[text()='Spam']")
+    @FindBy(partialLinkText="Spam")
     private WebElement linkSpam;
+
+    @FindBy(xpath="//span[@aria-label='Close']")
+    private WebElement buttonClose;
 
     private WebDriver driver;
 
@@ -55,5 +59,9 @@ public class InboxPage {
         expanderMoreLess.click();
         linkSpam.click();
         return new SpamPage(driver);
+    }
+
+    public void closeContextDialog() {
+        buttonClose.click();
     }
 }
