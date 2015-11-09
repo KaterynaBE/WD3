@@ -7,13 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 
 /**
- * New message pop-up elements and methods.
+ * 'New message' pop-up elements and methods.
  */
 
 public class NewMessagePopup {
-
-    @FindBy(id =":9o")
-    private WebElement textareaEmail;
 
     @FindBy(xpath="//textarea[@name='to']")
     private WebElement textareaTo;
@@ -32,7 +29,6 @@ public class NewMessagePopup {
     }
 
     public InboxPage sendEmail(String to, String subject) {
-        InboxPage.buttonCompose.click();
         textareaTo.sendKeys(to);
         textareaSubjectbox.sendKeys(subject);
         buttonSend.click();

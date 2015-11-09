@@ -30,12 +30,8 @@ public class InboxPage {
     @FindBy(className="ait")
     private WebElement expanderMoreLess;
 
-    //@FindBy(xpath="//span[text()='Spam']")
-    @FindBy(partialLinkText="Spam")
+    @FindBy(linkText = "Spam")
     private WebElement linkSpam;
-
-    @FindBy(xpath="//span[@aria-label='Close']")
-    private WebElement buttonClose;
 
     private WebDriver driver;
 
@@ -44,24 +40,26 @@ public class InboxPage {
         PageFactory.initElements(driver, this);
     }
 
+    public NewMessagePopup initiateNewEmail() {
+        buttonCompose.click();
+        return new NewMessagePopup(driver);
+    }
+
     public SignInPage signOut() {
         expanderAccound.click();
         buttonSignOut.click();
         return new SignInPage(driver);
     }
 
-    public void reportSpam() {
+    public SpamConfirmDialog reportSpam() {
         listOfEmails.click();
         buttonReportSpam.click();
+        return new SpamConfirmDialog(driver);
     }
 
     public SpamPage openSpamFolder() {
         expanderMoreLess.click();
         linkSpam.click();
         return new SpamPage(driver);
-    }
-
-    public void closeContextDialog() {
-        buttonClose.click();
     }
 }
