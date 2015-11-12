@@ -1,4 +1,4 @@
-package com.epam.auto.pages;
+package com.epam.auto.ui.pages;
 
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.WebElement;

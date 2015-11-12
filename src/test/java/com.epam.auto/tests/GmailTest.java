@@ -1,7 +1,9 @@
-package com.epam.auto.tests.tests;
+package com.epam.auto.tests;
 
-import com.epam.auto.pages.*;
-import com.epam.auto.tests.tests.BaseTest;
+import com.epam.auto.ui.pages.InboxPage;
+import com.epam.auto.ui.pages.NewMessagePopup;
+import com.epam.auto.ui.pages.SignInPage;
+import com.epam.auto.ui.pages.SpamConfirmDialog;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
