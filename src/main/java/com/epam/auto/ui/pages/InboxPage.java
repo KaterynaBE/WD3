@@ -21,8 +21,8 @@ public class InboxPage {
     @FindBy(xpath="//div[@aria-label='Report spam']")
     private WebElement buttonReportSpam;
 
-    @FindBy(className="gb_Qa")
-    private WebElement expanderAccount;
+    @FindBy(xpath="//a[@href='https://accounts.google.com/SignOutOptions?hl=en&continue=https://mail.google.com/mail&service=mail']")
+    private WebElement iconAccount;
 
     @FindBy(xpath="//a[text()='Sign out']")
     private WebElement buttonSignOut;
@@ -46,7 +46,7 @@ public class InboxPage {
     }
 
     public SignInPage signOut() {
-        expanderAccount.click();
+        iconAccount.click();
         buttonSignOut.click();
         return new SignInPage(driver);
     }

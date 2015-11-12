@@ -4,7 +4,10 @@ import com.epam.auto.ui.pages.InboxPage;
 import com.epam.auto.ui.pages.NewMessagePopup;
 import com.epam.auto.ui.pages.SignInPage;
 import com.epam.auto.ui.pages.SpamConfirmDialog;
+import com.epam.auto.ui.services.EmailManager;
+import com.epam.auto.utils.StringUtils;
 import org.junit.Test;
+import org.junit.Before;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
@@ -30,6 +33,13 @@ public class GmailTest extends BaseTest {
     private final String PASSWORD2 = "testtasktaskpwd2";
     private final String EMAIL_TITLE = "Email title";
 
+    public EmailManager emailMng;
+
+    @Before
+    public void initManagers() {
+        emailMng = new EmailManager(driver);
+    }
+
     @Test
     public void testSentGmail() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -37,6 +47,8 @@ public class GmailTest extends BaseTest {
         // 1, 2
         InboxPage inboxPage = signInPage.signIn(USERNAME1, PASSWORD1);
         NewMessagePopup newMessage = inboxPage.initiateNewEmail();
+        // String expectedRepositoryName = TEST_REPO_NAME + StringUtils.getRandomString(6);
+
         newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
         inboxPage.signOut();
 
@@ -67,6 +79,7 @@ public class GmailTest extends BaseTest {
         inboxPage.openSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
-        driver.getPageSource().contains(EMAIL_TITLE);
+        String expectedEmailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
+        driver.getPageSource().contains(expectedEmailTitle);
     }
 }
