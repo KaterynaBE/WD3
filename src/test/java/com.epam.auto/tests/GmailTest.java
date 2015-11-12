@@ -1,6 +1,7 @@
-package com.epam.auto.tests;
+package com.epam.auto.tests.tests;
 
 import com.epam.auto.pages.*;
+import com.epam.auto.tests.tests.BaseTest;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;

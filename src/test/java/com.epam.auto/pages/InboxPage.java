@@ -22,7 +22,7 @@ public class InboxPage {
     private WebElement buttonReportSpam;
 
     @FindBy(className="gb_Qa")
-    private WebElement expanderAccound;
+    private WebElement expanderAccount;
 
     @FindBy(xpath="//a[text()='Sign out']")
     private WebElement buttonSignOut;
@@ -46,7 +46,7 @@ public class InboxPage {
     }
 
     public SignInPage signOut() {
-        expanderAccound.click();
+        expanderAccount.click();
         buttonSignOut.click();
         return new SignInPage(driver);
     }

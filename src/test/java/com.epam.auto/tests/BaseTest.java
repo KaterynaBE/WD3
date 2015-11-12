@@ -1,4 +1,4 @@
-package com.epam.auto.tests;
+package com.epam.auto.tests.tests;
 
 import org.junit.After;
 import org.junit.Before;
