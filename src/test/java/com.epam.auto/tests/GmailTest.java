@@ -11,6 +11,7 @@ import org.junit.Before;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
+import org.junit.Assert;
 
 
 /**
@@ -47,7 +48,6 @@ public class GmailTest extends BaseTest {
         // 1, 2
         InboxPage inboxPage = signInPage.signIn(USERNAME1, PASSWORD1);
         NewMessagePopup newMessage = inboxPage.initiateNewEmail();
-        // String expectedRepositoryName = TEST_REPO_NAME + StringUtils.getRandomString(6);
 
         newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
         inboxPage.signOut();
@@ -79,7 +79,6 @@ public class GmailTest extends BaseTest {
         inboxPage.openSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
-        String expectedEmailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
-        driver.getPageSource().contains(expectedEmailTitle);
+        Assert.assertTrue(driver.getPageSource().contains(EMAIL_TITLE));
     }
 }
