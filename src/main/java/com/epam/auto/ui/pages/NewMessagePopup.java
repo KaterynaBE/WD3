@@ -1,6 +1,5 @@
 package com.epam.auto.ui.pages;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,10 +28,10 @@ public class NewMessagePopup {
         PageFactory.initElements(driver, this);
     }
 
-    public InboxPage sendEmail(String to, String subject) {
+    public void sendEmail(String to, String subject) {
         textareaTo.sendKeys(to);
         textareaSubjectbox.sendKeys(subject);
         buttonSend.click();
-        return new InboxPage(driver);
+        // return new BasePage();
     }
 }

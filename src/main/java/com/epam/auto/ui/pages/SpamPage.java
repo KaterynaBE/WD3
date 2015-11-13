@@ -7,12 +7,13 @@ import org.openqa.selenium.support.PageFactory;
  * 'Spam' page elements and methods..
  */
 
-public class SpamPage {
+public class SpamPage extends BasePage {
 
-    private WebDriver driver;
+//    private WebDriver driver;
 
     public SpamPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+//        this.driver = driver;
+//        PageFactory.initElements(driver, this);
+        super(driver);
     }
 }
