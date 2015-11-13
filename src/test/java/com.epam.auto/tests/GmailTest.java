@@ -34,6 +34,7 @@ public class GmailTest extends BaseTest {
     private final String USERNAME2 = "testtasktask2@gmail.com";
     private final String PASSWORD2 = "testtasktaskpwd2";
     private final String EMAIL_TITLE = "Email title";
+    private final String MESSAGE = "Some awesome text";
 
     public EmailManager emailMng;
 
@@ -50,15 +51,16 @@ public class GmailTest extends BaseTest {
         BasePage basePage = signInPage.signIn(USERNAME1, PASSWORD1);
         NewMessagePopup newMessage = basePage.initiateNewEmail();
 
-        newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
+        String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
+        newMessage.sendEmail(USERNAME2, emailTitle, MESSAGE);
         basePage.signOut();
 
         // Accepting alert shown. Sometimes (seldom) it's not shown which causes. It's not connected to butter bar
         // display as I thought earlier - so wait for element to be displayed will not help. Condition if it's displayed
         // - click , otherwise - go further should help.
         // TODO (in case I'll still need it) -> move accept alert to base page as it's created.
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+//        Alert alert = driver.switchTo().alert();
+//        alert.accept();
 
         // 3, 4
         InboxPage inboxPage = signInPage.signIn(USERNAME2, PASSWORD2);
@@ -71,18 +73,17 @@ public class GmailTest extends BaseTest {
         signInPage = basePage.signOut();
         inboxPage  = signInPage.signIn(USERNAME1, PASSWORD1);
         newMessage = inboxPage.initiateNewEmail();
-        newMessage.sendEmail(USERNAME2, EMAIL_TITLE);
+        newMessage.sendEmail(USERNAME2, emailTitle, MESSAGE);
 
         // 7, 8
         inboxPage.signOut();
-        driver.switchTo().alert();
-        alert.accept();
+//        driver.switchTo().alert();
+//        alert.accept();
 
         signInPage.signIn(USERNAME2, PASSWORD2);
         inboxPage.openSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
-        // String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
-        Assert.assertTrue(driver.getPageSource().contains(EMAIL_TITLE));
+        Assert.assertTrue(driver.getPageSource().contains(emailTitle));
     }
 }

@@ -18,6 +18,9 @@ public class NewMessagePopup {
     @FindBy(xpath="//input[@name='subjectbox']")
     private WebElement textareaSubjectbox;
 
+    @FindBy(xpath="//div[@aria-label='Message Body']")
+    private WebElement textareaMessageBody;
+
     @FindBy(xpath="//div[text()='Send']")
     private WebElement buttonSend;
 
@@ -28,9 +31,10 @@ public class NewMessagePopup {
         PageFactory.initElements(driver, this);
     }
 
-    public void sendEmail(String to, String subject) {
+    public void sendEmail(String to, String subject, String message) {
         textareaTo.sendKeys(to);
         textareaSubjectbox.sendKeys(subject);
+        textareaMessageBody.sendKeys(message);
         buttonSend.click();
         // return new BasePage();
     }
