@@ -1,29 +1,24 @@
 package com.epam.auto.ui.services;
 
-import com.epam.auto.ui.pages.InboxPage;
+import com.epam.auto.ui.pages.BasePage;
 import org.openqa.selenium.WebDriver;
-import org.apache.log4j.Logger;
 
 import com.epam.auto.ui.pages.NewMessagePopup;
-import com.epam.auto.ui.pages.InboxPage;
+import com.epam.auto.ui.pages.BasePage;
 
 /**
  * Created by ekaterinabut on 11/12/15.
  */
 public class EmailManager extends BaseManager {
 
-    private final Logger logger = Logger.getLogger(EmailManager.class);
-
-    // private NewMessagePopup newMessagePopup;
-    private InboxPage inboxPage;
+    private BasePage basePage;
     public EmailManager(WebDriver driver) {
         super(driver);
     }
 
-    public void sendEmail(String to, String subject) {
-        logger.info("Creating and sending new email with name: '" + to + "'");
-        NewMessagePopup newMessagePopup = new InboxPage(driver).initiateNewEmail();
-        newMessagePopup.sendEmail(to, subject);
-        inboxPage = new InboxPage(driver);
+    public void sendEmail(String to, String subject, String message) {
+        NewMessagePopup newMessagePopup = new BasePage(driver).initiateNewEmail();
+        newMessagePopup.sendEmail(to, subject, message);
+        basePage = new BasePage(driver);
     }
 }

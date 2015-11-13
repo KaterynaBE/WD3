@@ -5,7 +5,10 @@ import com.epam.auto.ui.pages.InboxPage;
 import com.epam.auto.ui.pages.NewMessagePopup;
 import com.epam.auto.ui.pages.SignInPage;
 import com.epam.auto.ui.pages.SpamConfirmDialog;
+
 import com.epam.auto.ui.services.EmailManager;
+import com.epam.auto.ui.services.SigninManager;
+
 import com.epam.auto.utils.StringUtils;
 import org.junit.Test;
 import org.junit.Before;
@@ -37,10 +40,12 @@ public class GmailTest extends BaseTest {
     private final String MESSAGE = "Some awesome text";
 
     public EmailManager emailMng;
+    public SigninManager signinMng;
 
     @Before
     public void initManagers() {
         emailMng = new EmailManager(driver);
+        signinMng = new SigninManager(driver);
     }
 
     @Test
@@ -48,11 +53,12 @@ public class GmailTest extends BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         SignInPage signInPage = new SignInPage(driver);
         // 1, 2
-        BasePage basePage = signInPage.signIn(USERNAME1, PASSWORD1);
-        NewMessagePopup newMessage = basePage.initiateNewEmail();
+        signinMng.signInGmail(USERNAME1, PASSWORD1);
 
         String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
-        newMessage.sendEmail(USERNAME2, emailTitle, MESSAGE);
+        emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
+
+        BasePage basePage = new BasePage(driver);
         basePage.signOut();
 
         // Accepting alert shown. Sometimes (seldom) it's not shown which causes. It's not connected to butter bar
@@ -63,7 +69,7 @@ public class GmailTest extends BaseTest {
 //        alert.accept();
 
         // 3, 4
-        InboxPage inboxPage = signInPage.signIn(USERNAME2, PASSWORD2);
+        signinMng.signInGmail(USERNAME2, PASSWORD2);
         // Commenting out us dialog is not shown now - as a result of test runs Google is convinced that it IS spam
         // and do not ask about it. May be uncommented as needed for another emails.
 //        SpamConfirmDialog spamDialog = inboxPage.reportSpam();
@@ -71,17 +77,16 @@ public class GmailTest extends BaseTest {
 
         // 5, 6
         signInPage = basePage.signOut();
-        inboxPage  = signInPage.signIn(USERNAME1, PASSWORD1);
-        newMessage = inboxPage.initiateNewEmail();
-        newMessage.sendEmail(USERNAME2, emailTitle, MESSAGE);
+        basePage  = signInPage.signIn(USERNAME1, PASSWORD1);
+        emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
 
         // 7, 8
-        inboxPage.signOut();
+        basePage.signOut();
 //        driver.switchTo().alert();
 //        alert.accept();
 
-        signInPage.signIn(USERNAME2, PASSWORD2);
-        inboxPage.openSpamFolder();
+        signinMng.signInGmail(USERNAME2, PASSWORD2);
+        basePage.openSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
         Assert.assertTrue(driver.getPageSource().contains(emailTitle));

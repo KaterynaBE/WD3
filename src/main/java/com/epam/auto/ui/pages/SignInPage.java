@@ -35,9 +35,14 @@ public class SignInPage {
     }
 
     public InboxPage signIn(String email, String password) {
+        inputEmail.clear();
         inputEmail.sendKeys(email);
+
         buttonNext.click();
+
+        inputPassword.clear();
         inputPassword.sendKeys(password);
+
         // making sure that Stay Signed in checkbox is not ticked - for easier switching accounts.
         if (checkboxStaySigned.isSelected()) {
             checkboxStaySigned.click();
