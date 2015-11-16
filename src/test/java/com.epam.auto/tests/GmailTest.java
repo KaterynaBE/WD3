@@ -1,21 +1,17 @@
 package com.epam.auto.tests;
 
-import com.epam.auto.ui.pages.BasePage;
-import com.epam.auto.ui.pages.InboxPage;
-import com.epam.auto.ui.pages.NewMessagePopup;
-import com.epam.auto.ui.pages.SignInPage;
-import com.epam.auto.ui.pages.SpamConfirmDialog;
-
 import com.epam.auto.ui.services.EmailManager;
 import com.epam.auto.ui.services.SigninManager;
+import com.epam.auto.ui.services.SignoutManager;
 
+import com.epam.auto.ui.services.SpamManager;
 import com.epam.auto.utils.StringUtils;
 import org.junit.Test;
 import org.junit.Before;
 
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Alert;
 import org.junit.Assert;
+import org.openqa.selenium.Alert;
 
 
 /**
@@ -41,52 +37,52 @@ public class GmailTest extends BaseTest {
 
     public EmailManager emailMng;
     public SigninManager signinMng;
+    public SignoutManager signoutMng;
+    public SpamManager spamMng;
 
     @Before
     public void initManagers() {
         emailMng = new EmailManager(driver);
         signinMng = new SigninManager(driver);
+        signoutMng = new SignoutManager(driver);
+        spamMng = new SpamManager(driver);
     }
 
     @Test
     public void testSentGmail() {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        SignInPage signInPage = new SignInPage(driver);
         // 1, 2
         signinMng.signInGmail(USERNAME1, PASSWORD1);
 
         String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
         emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
 
-        BasePage basePage = new BasePage(driver);
-        basePage.signOut();
+        signoutMng.signoutGmail();
 
         // Accepting alert shown. Sometimes (seldom) it's not shown which causes. It's not connected to butter bar
         // display as I thought earlier - so wait for element to be displayed will not help. Condition if it's displayed
         // - click , otherwise - go further should help.
         // TODO (in case I'll still need it) -> move accept alert to base page as it's created.
-//        Alert alert = driver.switchTo().alert();
-//        alert.accept();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
 
         // 3, 4
         signinMng.signInGmail(USERNAME2, PASSWORD2);
-        // Commenting out us dialog is not shown now - as a result of test runs Google is convinced that it IS spam
-        // and do not ask about it. May be uncommented as needed for another emails.
-//        SpamConfirmDialog spamDialog = inboxPage.reportSpam();
-//        inboxPage = spamDialog.confirmItsSpam();
+        spamMng.reportSpam();
 
         // 5, 6
-        signInPage = basePage.signOut();
-        basePage  = signInPage.signIn(USERNAME1, PASSWORD1);
+        signoutMng.signoutGmail();
+        signinMng.signInGmail(USERNAME1, PASSWORD1);
+//        driver.switchTo().alert();
+//        alert.accept();
         emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
 
         // 7, 8
-        basePage.signOut();
+        signoutMng.signoutGmail();
 //        driver.switchTo().alert();
 //        alert.accept();
-
         signinMng.signInGmail(USERNAME2, PASSWORD2);
-        basePage.openSpamFolder();
+        spamMng.navigateToSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
         Assert.assertTrue(driver.getPageSource().contains(emailTitle));

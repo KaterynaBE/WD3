@@ -50,5 +50,4 @@ public class SignInPage {
         buttonSignIn.click();
         return new InboxPage(driver);
     }
-
 }
