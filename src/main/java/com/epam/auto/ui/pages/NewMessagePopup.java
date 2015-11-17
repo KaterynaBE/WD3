@@ -36,6 +36,5 @@ public class NewMessagePopup {
         textareaSubjectbox.sendKeys(subject);
         textareaMessageBody.sendKeys(message);
         buttonSend.click();
-        // return new BasePage();
     }
 }

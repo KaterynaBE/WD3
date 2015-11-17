@@ -3,15 +3,15 @@ package com.epam.auto.tests;
 import com.epam.auto.ui.services.EmailManager;
 import com.epam.auto.ui.services.SigninManager;
 import com.epam.auto.ui.services.SignoutManager;
-
 import com.epam.auto.ui.services.SpamManager;
+import com.epam.auto.ui.services.AlertManager;
+
 import com.epam.auto.utils.StringUtils;
 import org.junit.Test;
 import org.junit.Before;
 
 import java.util.concurrent.TimeUnit;
 import org.junit.Assert;
-import org.openqa.selenium.Alert;
 
 
 /**
@@ -39,6 +39,7 @@ public class GmailTest extends BaseTest {
     public SigninManager signinMng;
     public SignoutManager signoutMng;
     public SpamManager spamMng;
+    public AlertManager alertMng;
 
     @Before
     public void initManagers() {
@@ -46,6 +47,7 @@ public class GmailTest extends BaseTest {
         signinMng = new SigninManager(driver);
         signoutMng = new SignoutManager(driver);
         spamMng = new SpamManager(driver);
+        alertMng = new AlertManager(driver);
     }
 
     @Test
@@ -59,12 +61,8 @@ public class GmailTest extends BaseTest {
 
         signoutMng.signoutGmail();
 
-        // Accepting alert shown. Sometimes (seldom) it's not shown which causes. It's not connected to butter bar
-        // display as I thought earlier - so wait for element to be displayed will not help. Condition if it's displayed
-        // - click , otherwise - go further should help.
-        // TODO (in case I'll still need it) -> move accept alert to base page as it's created.
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        // Accepting sign-out confirmation alert if shown (it's not always there, but sometimes).
+        alertMng.acceptAlertIfPresent();
 
         // 3, 4
         signinMng.signInGmail(USERNAME2, PASSWORD2);
@@ -73,14 +71,12 @@ public class GmailTest extends BaseTest {
         // 5, 6
         signoutMng.signoutGmail();
         signinMng.signInGmail(USERNAME1, PASSWORD1);
-//        driver.switchTo().alert();
-//        alert.accept();
+        alertMng.acceptAlertIfPresent();
         emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
 
         // 7, 8
         signoutMng.signoutGmail();
-//        driver.switchTo().alert();
-//        alert.accept();
+        alertMng.acceptAlertIfPresent();
         signinMng.signInGmail(USERNAME2, PASSWORD2);
         spamMng.navigateToSpamFolder();
 
