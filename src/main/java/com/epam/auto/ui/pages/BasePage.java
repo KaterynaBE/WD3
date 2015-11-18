@@ -66,7 +66,6 @@ public class BasePage {
         if(isAlertPresent()){
             driver.switchTo().alert();
             driver.switchTo().alert().accept();
-            // driver.switchTo().defaultContent();
         }
     }
 }
