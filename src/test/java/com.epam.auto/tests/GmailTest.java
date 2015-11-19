@@ -6,6 +6,7 @@ import com.epam.auto.ui.services.SpamManager;
 import com.epam.auto.ui.services.AlertManager;
 
 import com.epam.auto.utils.StringUtils;
+
 import org.junit.Test;
 import org.junit.Before;
 
