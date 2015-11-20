@@ -5,12 +5,12 @@ package com.epam.auto.patterns.staticfactorymethod;
  */
 public class Email {
 
-    private String to;
+    private String addressee;
     private String subject;
     private String emailBody;
 
-    public Email(String to, String subject, String emailBody) {
-        this.to = to;
+    public Email(String addressee, String subject, String emailBody) {
+        this.addressee = addressee;
         this.subject = subject;
         this.emailBody = emailBody;
     }
@@ -18,8 +18,8 @@ public class Email {
     public Email() {
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setAddressee(String addressee) {
+        this.addressee = addressee;
     }
 
     public void setSubject(String subject) {
@@ -30,8 +30,8 @@ public class Email {
         this.emailBody = emailBody;
     }
 
-    public String getTo() {
-        return to;
+    public String getAddressee() {
+        return addressee;
     }
 
     public String getSubject() {

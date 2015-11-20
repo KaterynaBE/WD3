@@ -32,8 +32,10 @@ public class NewMessagePopup {
     }
 
     public void sendEmail(String to, String subject, String message) {
+        textareaTo.click();
         textareaTo.sendKeys(to);
         textareaSubjectbox.sendKeys(subject);
+        textareaMessageBody.click();
         textareaMessageBody.sendKeys(message);
         buttonSend.click();
     }

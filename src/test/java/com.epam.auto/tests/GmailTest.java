@@ -1,5 +1,8 @@
 package com.epam.auto.tests;
 
+import com.epam.auto.patterns.staticfactorymethod.Email;
+
+import com.epam.auto.patterns.staticfactorymethod.EmailStaticFactory;
 import com.epam.auto.ui.services.EmailManager;
 import com.epam.auto.ui.services.SignManager;
 import com.epam.auto.ui.services.SpamManager;
@@ -55,8 +58,9 @@ public class GmailTest extends BaseTest {
         signMng.signInGmail(USERNAME1, PASSWORD1);
 
         String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
-        emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
+        Email email = EmailStaticFactory.createDefaultEmail(USERNAME2, emailTitle, MESSAGE);
 
+        emailMng.sendEmail(email.getAddressee(), email.getSubject(), email.getEmailBody());
         signMng.signoutGmail();
 
         // Accepting sign-out confirmation alert if shown (it's not always there, but sometimes).
@@ -70,7 +74,8 @@ public class GmailTest extends BaseTest {
         signMng.signoutGmail();
         signMng.signInGmail(USERNAME1, PASSWORD1);
         alertMng.acceptAlertIfPresent();
-        emailMng.sendEmail(USERNAME2, emailTitle, MESSAGE);
+
+        emailMng.sendEmail(email.getAddressee(), email.getSubject(), email.getEmailBody());
 
         // 7, 8
         signMng.signoutGmail();

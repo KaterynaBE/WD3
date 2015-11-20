@@ -1,6 +1,5 @@
 package com.epam.auto.ui.services;
 
-import com.epam.auto.ui.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 
 import com.epam.auto.ui.pages.NewMessagePopup;

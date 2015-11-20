@@ -5,18 +5,12 @@ package com.epam.auto.patterns.staticfactorymethod;
  */
 public class EmailStaticFactory {
 
-    public static Email createSimpleEmail(String to, String subject, String emailBody) {
+
+    public static Email createDefaultEmail(String addressee, String subject, String emailBody) {
         Email email = new Email();
-        email.setTo(to);
+        email.setAddressee(addressee);
         email.setSubject(subject);
         email.setEmailBody(emailBody);
-        return email;
-    }
-
-    public static Email createEmptyEmail(String to, String subject) {
-        Email email = new Email();
-        email.setTo(to);
-        email.setSubject(subject);
         return email;
     }
 }
