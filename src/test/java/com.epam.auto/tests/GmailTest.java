@@ -6,7 +6,6 @@ import com.epam.auto.patterns.staticfactorymethod.EmailStaticFactory;
 import com.epam.auto.ui.services.EmailManager;
 import com.epam.auto.ui.services.SignManager;
 import com.epam.auto.ui.services.SpamManager;
-import com.epam.auto.ui.services.AlertManager;
 
 import com.epam.auto.utils.StringUtils;
 
@@ -41,14 +40,12 @@ public class GmailTest extends BaseTest {
     public EmailManager emailMng;
     public SignManager signMng;
     public SpamManager spamMng;
-    public AlertManager alertMng;
 
     @Before
     public void initManagers() {
         emailMng = new EmailManager(customDriver);
         signMng = new SignManager(customDriver);
         spamMng = new SpamManager(customDriver);
-        alertMng = new AlertManager(customDriver);
     }
 
     @Test
@@ -64,7 +61,7 @@ public class GmailTest extends BaseTest {
         signMng.signoutGmail();
 
         // Accepting sign-out confirmation alert if shown (it's not always there, but sometimes).
-         alertMng.acceptAlertIfPresent();
+        customDriver.acceptAlert();
 
         // 3, 4
         signMng.signInGmail(USERNAME2, PASSWORD2);
@@ -73,13 +70,13 @@ public class GmailTest extends BaseTest {
         // 5, 6
         signMng.signoutGmail();
         signMng.signInGmail(USERNAME1, PASSWORD1);
-        alertMng.acceptAlertIfPresent();
+        customDriver.acceptAlert();
 
         emailMng.sendEmail(email.getAddressee(), email.getSubject(), email.getEmailBody());
 
         // 7, 8
         signMng.signoutGmail();
-        alertMng.acceptAlertIfPresent();
+        customDriver.acceptAlert();
         signMng.signInGmail(USERNAME2, PASSWORD2);
         spamMng.navigateToSpamFolder();
 

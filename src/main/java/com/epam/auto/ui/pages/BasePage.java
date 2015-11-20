@@ -50,22 +50,4 @@ public class BasePage {
         linkSpam.click();
         return new SpamPage(driver);
     }
-
-    public boolean isAlertPresent(){
-        try{
-            driver.switchTo().alert();
-            return true;
-        }
-        catch(Exception e){
-            return false;
-        }
-    }
-
-    public void acceptAlert()
-    {
-        if(isAlertPresent()){
-            driver.switchTo().alert();
-            driver.switchTo().alert().accept();
-        }
-    }
 }

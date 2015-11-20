@@ -42,6 +42,7 @@ public class Decorator implements WebDriver {
         driver.close();
     }
 
+    // This method was updated on Decorator on demo purposes.
     public void quit() {
         System.out.println("Testing completed. See results below.");
         driver.quit();
@@ -69,5 +70,24 @@ public class Decorator implements WebDriver {
 
     public Options manage() {
         return driver.manage();
+    }
+
+    // Accept alert if present was created to usefully distinct Decorator from WebDriver.
+    public boolean isAlertPresent(){
+        try{
+            driver.switchTo().alert();
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    public void acceptAlert()
+    {
+        if(isAlertPresent()){
+            driver.switchTo().alert();
+            driver.switchTo().alert().accept();
+        }
     }
 }
