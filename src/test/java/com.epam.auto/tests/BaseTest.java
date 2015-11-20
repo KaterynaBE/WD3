@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.epam.auto.patterns.decorator.Decorator;
+
 
 /**
  * Base test - initializing setUp (create WD instance), navigate to URL and tearDown - quits driver.
@@ -12,17 +14,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    //protected WebDriver driver;
+    protected Decorator customDriver;
     public static final String BASE_URL = "http://www.gmail.com";
 
     @Before
     public void setUp() {
-        driver = new FirefoxDriver();
+        WebDriver driver = new FirefoxDriver();
+        customDriver = new Decorator(driver);
+        driver.manage().window().maximize();
         driver.get(BASE_URL);
+        // driver.get();
     }
 
     @After
     public void tearDown() {
-        driver.quit();
+        customDriver.quit();
     }
 }

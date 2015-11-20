@@ -35,7 +35,7 @@ public class GmailTest extends BaseTest {
     private final String PASSWORD1 = "testtasktaskpwd";
     private final String USERNAME2 = "testtasktask2@gmail.com";
     private final String PASSWORD2 = "testtasktaskpwd2";
-    private final String EMAIL_TITLE = "Email title";
+    private final String EMAIL_TITLE = "Email title ";
     private final String MESSAGE = "Some awesome text";
 
     public EmailManager emailMng;
@@ -45,15 +45,15 @@ public class GmailTest extends BaseTest {
 
     @Before
     public void initManagers() {
-        emailMng = new EmailManager(driver);
-        signMng = new SignManager(driver);
-        spamMng = new SpamManager(driver);
-        alertMng = new AlertManager(driver);
+        emailMng = new EmailManager(customDriver);
+        signMng = new SignManager(customDriver);
+        spamMng = new SpamManager(customDriver);
+        alertMng = new AlertManager(customDriver);
     }
 
     @Test
     public void testSentGmail() {
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        customDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         // 1, 2
         signMng.signInGmail(USERNAME1, PASSWORD1);
 
@@ -64,7 +64,7 @@ public class GmailTest extends BaseTest {
         signMng.signoutGmail();
 
         // Accepting sign-out confirmation alert if shown (it's not always there, but sometimes).
-        alertMng.acceptAlertIfPresent();
+         alertMng.acceptAlertIfPresent();
 
         // 3, 4
         signMng.signInGmail(USERNAME2, PASSWORD2);
@@ -84,6 +84,6 @@ public class GmailTest extends BaseTest {
         spamMng.navigateToSpamFolder();
 
         // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
-        Assert.assertTrue(driver.getPageSource().contains(emailTitle));
+        Assert.assertTrue(customDriver.getPageSource().contains(emailTitle));
     }
 }
