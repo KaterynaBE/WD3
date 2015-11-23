@@ -14,7 +14,6 @@ import com.epam.auto.patterns.decorator.Decorator;
 
 public class BaseTest {
 
-    //protected WebDriver driver;
     protected Decorator customDriver;
     public static final String BASE_URL = "http://www.gmail.com";
 
@@ -24,7 +23,6 @@ public class BaseTest {
         customDriver = new Decorator(driver);
         driver.manage().window().maximize();
         driver.get(BASE_URL);
-        // driver.get();
     }
 
     @After

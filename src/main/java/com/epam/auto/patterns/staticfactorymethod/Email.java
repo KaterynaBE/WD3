@@ -15,9 +15,6 @@ public class Email {
         this.emailBody = emailBody;
     }
 
-    public Email() {
-    }
-
     public void setAddressee(String addressee) {
         this.addressee = addressee;
     }
