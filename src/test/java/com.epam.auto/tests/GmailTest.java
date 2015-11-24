@@ -1,8 +1,8 @@
 package com.epam.auto.tests;
 
-import com.epam.auto.patterns.staticfactorymethod.Email;
+import com.epam.auto.objects.Email;
 
-import com.epam.auto.patterns.staticfactorymethod.EmailStaticFactory;
+import com.epam.auto.factories.EmailStaticFactory;
 import com.epam.auto.ui.services.EmailManager;
 import com.epam.auto.ui.services.SignManager;
 import com.epam.auto.ui.services.SpamManager;

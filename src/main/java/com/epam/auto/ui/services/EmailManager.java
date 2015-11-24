@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.epam.auto.ui.pages.NewMessagePopup;
 import com.epam.auto.ui.pages.BasePage;
 
-import com.epam.auto.patterns.staticfactorymethod.Email;
+import com.epam.auto.objects.Email;
 
 /**
  * Created by ekaterinabut on 11/12/15.

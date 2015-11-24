@@ -1,4 +1,4 @@
-package com.epam.auto.patterns.decorator;
+package com.epam.auto.core.webdriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

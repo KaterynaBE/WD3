@@ -1,4 +1,4 @@
-package com.epam.auto.patterns.staticfactorymethod;
+package com.epam.auto.objects;
 
 /**
  * Created by ekaterinabut on 11/18/15.

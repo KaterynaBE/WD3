@@ -1,6 +1,6 @@
 package com.epam.auto.tests;
 
-import com.epam.auto.patterns.decorator.CustomWebDriver;
+import com.epam.auto.core.webdriver.CustomWebDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;

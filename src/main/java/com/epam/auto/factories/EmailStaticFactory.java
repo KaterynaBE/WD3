@@ -1,4 +1,6 @@
-package com.epam.auto.patterns.staticfactorymethod;
+package com.epam.auto.factories;
+
+import com.epam.auto.objects.Email;
 
 /**
  * Created by ekaterinabut on 11/19/15.
