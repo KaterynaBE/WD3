@@ -10,11 +10,11 @@ import java.util.Set;
 /**
  * WebDriver decorator.
  */
-public class Decorator implements WebDriver {
+public class CustomWebDriver implements WebDriver {
 
     protected WebDriver driver;
 
-    public Decorator(WebDriver driver) {
+    public CustomWebDriver(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -42,7 +42,7 @@ public class Decorator implements WebDriver {
         driver.close();
     }
 
-    // This method was updated on Decorator on demo purposes.
+    // This method was updated on CustomWebDriver on demo purposes.
     public void quit() {
         System.out.println("Testing completed. See results below.");
         driver.quit();
@@ -72,7 +72,7 @@ public class Decorator implements WebDriver {
         return driver.manage();
     }
 
-    // Accept alert if present was created to usefully distinct Decorator from WebDriver.
+    // Accept alert if present was created to usefully distinct CustomWebDriver from WebDriver.
     public boolean isAlertPresent(){
         try{
             driver.switchTo().alert();
@@ -86,7 +86,6 @@ public class Decorator implements WebDriver {
     public void acceptAlert()
     {
         if(isAlertPresent()){
-            driver.switchTo().alert();
             driver.switchTo().alert().accept();
         }
     }

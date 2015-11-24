@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.epam.auto.patterns.staticfactorymethod.Email;
+
 
 /**
  * 'New message' pop-up elements and methods.
@@ -31,12 +33,12 @@ public class NewMessagePopup {
         PageFactory.initElements(driver, this);
     }
 
-    public void sendEmail(String to, String subject, String message) {
+    public void sendEmail(Email email) {
         textareaTo.click();
-        textareaTo.sendKeys(to);
-        textareaSubjectbox.sendKeys(subject);
+        textareaTo.sendKeys(email.getAddressee());
+        textareaSubjectbox.sendKeys(email.getSubject());
         textareaMessageBody.click();
-        textareaMessageBody.sendKeys(message);
+        textareaMessageBody.sendKeys(email.getEmailBody());
         buttonSend.click();
     }
 }

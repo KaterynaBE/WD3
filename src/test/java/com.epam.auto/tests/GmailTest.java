@@ -57,7 +57,7 @@ public class GmailTest extends BaseTest {
         String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
         Email email = EmailStaticFactory.createDefaultEmail(USERNAME2, emailTitle, MESSAGE);
 
-        emailMng.sendEmail(email.getAddressee(), email.getSubject(), email.getEmailBody());
+        emailMng.sendEmail(email);
         signMng.signoutGmail();
 
         // Accepting sign-out confirmation alert if shown (it's not always there, but sometimes).
@@ -72,7 +72,7 @@ public class GmailTest extends BaseTest {
         signMng.signInGmail(USERNAME1, PASSWORD1);
         customDriver.acceptAlert();
 
-        emailMng.sendEmail(email.getAddressee(), email.getSubject(), email.getEmailBody());
+        emailMng.sendEmail(email);
 
         // 7, 8
         signMng.signoutGmail();
