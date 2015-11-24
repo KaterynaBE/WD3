@@ -2,6 +2,7 @@ package com.epam.auto.ui.services;
 
 import com.epam.auto.ui.pages.InboxPage;
 import com.epam.auto.ui.pages.BasePage;
+import com.epam.auto.ui.pages.SpamPage;
 import org.openqa.selenium.WebDriver;
 
 
@@ -12,6 +13,7 @@ public class SpamManager extends BaseManager {
 
     private InboxPage inboxPage;
     private BasePage basePage;
+    private SpamPage spamPage;
     public SpamManager(WebDriver driver) {
         super(driver);
     }
@@ -24,5 +26,10 @@ public class SpamManager extends BaseManager {
     public void navigateToSpamFolder() {
         basePage = new BasePage(driver);
         basePage.openSpamFolder();
+        spamPage = new SpamPage(driver);
+    }
+
+    public String getSpamListText() {
+        return spamPage.spamList.getText();
     }
 }

@@ -35,7 +35,7 @@ public class GmailTest extends BaseTest {
     private final String USERNAME2 = "testtasktask2@gmail.com";
     private final String PASSWORD2 = "testtasktaskpwd2";
     private final String EMAIL_TITLE = "Email title ";
-    private final String MESSAGE = "Some awesome text";
+    private final String MESSAGE = "Some awesome text ";
 
     public EmailManager emailMng;
     public SignManager signMng;
@@ -83,9 +83,12 @@ public class GmailTest extends BaseTest {
         signMng.signoutGmail();
         customDriver.acceptAlert();
         signMng.signInGmail(USERNAME2, PASSWORD2);
+
         spamMng.navigateToSpamFolder();
 
-        // Easiest way is just check that text is present on page (email title). To be modified in smarter way.
-        Assert.assertTrue(customDriver.getPageSource().contains(emailTitle));
+        // Check that email title text is present on the list of emails on Spam folder.
+        // Note: failed for me, as second email was not directed to Spam folder automatically.
+        Assert.assertTrue("Verification Failed: email was not automatically directed to spam folder.",
+                spamMng.getSpamListText().contains(secondTitle));
     }
 }
