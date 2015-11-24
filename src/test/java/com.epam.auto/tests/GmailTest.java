@@ -55,7 +55,8 @@ public class GmailTest extends BaseTest {
         signMng.signInGmail(USERNAME1, PASSWORD1);
 
         String emailTitle = EMAIL_TITLE + StringUtils.getRandomString(6);
-        Email email = EmailStaticFactory.createDefaultEmail(USERNAME2, emailTitle, MESSAGE);
+        Email email = EmailStaticFactory.createDefaultEmail(USERNAME2, emailTitle, MESSAGE
+                                                            + StringUtils.getRandomString(7));
 
         emailMng.sendEmail(email);
         signMng.signoutGmail();
@@ -72,7 +73,11 @@ public class GmailTest extends BaseTest {
         signMng.signInGmail(USERNAME1, PASSWORD1);
         customDriver.acceptAlert();
 
-        emailMng.sendEmail(email);
+
+        String secondTitle = EMAIL_TITLE + StringUtils.getRandomString(4);
+        Email secondEmail = EmailStaticFactory.createDefaultEmail(USERNAME2, secondTitle, MESSAGE
+                                                                  + StringUtils.getRandomString(8));
+        emailMng.sendEmail(secondEmail);
 
         // 7, 8
         signMng.signoutGmail();

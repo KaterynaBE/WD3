@@ -33,12 +33,13 @@ public class NewMessagePopup {
         PageFactory.initElements(driver, this);
     }
 
-    public void sendEmail(Email email) {
+    public BasePage sendEmail(Email email) {
         textareaTo.click();
         textareaTo.sendKeys(email.getAddressee());
         textareaSubjectbox.sendKeys(email.getSubject());
         textareaMessageBody.click();
         textareaMessageBody.sendKeys(email.getEmailBody());
         buttonSend.click();
+        return new BasePage(driver);
     }
 }
