@@ -2,6 +2,7 @@ package com.epam.auto.ui.services;
 
 import com.epam.auto.ui.pages.BasePage;
 import com.epam.auto.ui.pages.SignInPage;
+import com.epam.auto.utils.ScreenshottingUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,7 @@ public class SignManager extends BaseManager {
 
     private SignInPage signinPage;
     private BasePage basePage;
+    private ScreenshottingUtils screenshottingUtils;
     public SignManager(WebDriver driver) {
         super(driver);
     }
@@ -24,6 +26,9 @@ public class SignManager extends BaseManager {
         logger.info("Sign-in to '" + email + "' account");
         signinPage = new SignInPage(driver);
         signinPage.signIn(email, password);
+        // This scr will show what's inside Spam folder on that step.
+//        screenshottingUtils.highlightElement(driver, linkSpam);
+//        screenshottingUtils.takeScreenshot();
     }
     public void signoutGmail()
     {

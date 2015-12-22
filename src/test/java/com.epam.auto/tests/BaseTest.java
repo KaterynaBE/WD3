@@ -28,8 +28,8 @@ public class BaseTest {
         driver.get(BASE_URL);
     }
 
-    @After
-    public void tearDown() {
-        customDriver.quit();
-    }
+//    @After
+//    public void tearDown() {
+//        customDriver.quit();
+//    }
 }

@@ -70,6 +70,7 @@ public class GmailTest extends BaseTest {
 
         // 5, 6
         signMng.signoutGmail();
+        customDriver.acceptAlert();
         signMng.signInGmail(USERNAME1, PASSWORD1);
         customDriver.acceptAlert();
 
