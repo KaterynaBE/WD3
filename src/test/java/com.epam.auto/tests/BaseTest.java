@@ -1,6 +1,8 @@
 package com.epam.auto.tests;
 
 import com.epam.auto.core.webdriver.CustomWebDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +17,8 @@ public class BaseTest {
 
     protected CustomWebDriver customDriver;
     public static final String BASE_URL = "http://www.gmail.com";
+
+    private final Logger logger = LogManager.getLogger(GmailTest.class.getName());
 
     @Before
     public void setUp() {

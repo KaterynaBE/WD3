@@ -30,7 +30,7 @@ import org.junit.Assert;
  */
 
 public class GmailTest extends BaseTest {
-    private final String USERNAME1 = "testtasktask";
+    private final String USERNAME1 = "testtasktask@gmail.com";
     private final String PASSWORD1 = "testtasktaskpwd";
     private final String USERNAME2 = "testtasktask2@gmail.com";
     private final String PASSWORD2 = "testtasktaskpwd2";

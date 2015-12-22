@@ -3,6 +3,8 @@ package com.epam.auto.ui.services;
 import com.epam.auto.ui.pages.InboxPage;
 import com.epam.auto.ui.pages.BasePage;
 import com.epam.auto.ui.pages.SpamPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 
@@ -10,6 +12,8 @@ import org.openqa.selenium.WebDriver;
  * Created by ekaterinabut on 11/13/15.
  */
 public class SpamManager extends BaseManager {
+
+    private final Logger logger = LogManager.getLogger(SpamManager.class.getName());
 
     private InboxPage inboxPage;
     private BasePage basePage;
@@ -19,11 +23,13 @@ public class SpamManager extends BaseManager {
     }
 
     public void reportSpam() {
+        logger.info("Reporting message as a spam");
         inboxPage = new InboxPage(driver);
         inboxPage.reportSpam();
     }
 
     public void navigateToSpamFolder() {
+        logger.info("Navigate to Spam folder");
         basePage = new BasePage(driver);
         basePage.openSpamFolder();
         spamPage = new SpamPage(driver);
