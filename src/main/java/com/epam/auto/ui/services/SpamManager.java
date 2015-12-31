@@ -23,19 +23,20 @@ public class SpamManager extends BaseManager {
     }
 
     public void reportSpam() {
-        logger.info("Reporting message as a spam");
+        logger.debug("Reporting inbox message as a spam");
         inboxPage = new InboxPage(driver);
         inboxPage.reportSpam();
     }
 
     public void navigateToSpamFolder() {
-        logger.info("Navigate to Spam folder");
+        logger.debug("Navigate to Spam folder");
         basePage = new BasePage(driver);
         basePage.openSpamFolder();
         spamPage = new SpamPage(driver);
     }
 
     public String getSpamListText() {
+        logger.debug("Getting list of items in Spam folder");
         return spamPage.spamList.getText();
     }
 }

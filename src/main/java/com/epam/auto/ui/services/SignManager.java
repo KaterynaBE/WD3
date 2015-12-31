@@ -23,15 +23,16 @@ public class SignManager extends BaseManager {
 
     public void signInGmail(String email, String password)
     {
-        logger.info("Sign-in to '" + email + "' account");
+        logger.debug("Sign-in to '" + email + "' account");
         signinPage = new SignInPage(driver);
         signinPage.signIn(email, password);
         // This scr will show what's inside Spam folder on that step.
 //        screenshottingUtils.highlightElement(driver, linkSpam);
-//        screenshottingUtils.takeScreenshot();
+        screenshottingUtils.takeScreenshot(driver);
     }
     public void signoutGmail()
     {
+        logger.debug("Signing out from gmail.");
         basePage = new BasePage(driver);
         basePage.signOut();
     }

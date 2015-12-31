@@ -22,7 +22,7 @@ public class EmailManager extends BaseManager {
     }
 
     public void sendEmail(Email email) {
-        logger.info("Sent email to '" + email + "'");
+        logger.debug("Sent email to '" + email + "'");
         NewMessagePopup newMessagePopup = new BasePage(driver).initiateNewEmail();
         newMessagePopup.sendEmail(email);
         basePage = new BasePage(driver);

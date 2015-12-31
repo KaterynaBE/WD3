@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by ekaterinabut on 12/21/15.
@@ -14,9 +15,8 @@ import java.io.IOException;
 public class ScreenshottingUtils {
 
     private static final Logger logger = LogManager.getLogger(ScreenshottingUtils.class.getName());
-    public WebDriver driver;
 
-    public File takeScreenshot() {
+    public static void takeScreenshot(WebDriver driver) {
         File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenshotFile, new File ("screenshot.png"));
@@ -24,14 +24,13 @@ public class ScreenshottingUtils {
         } catch (IOException e) {
             logger.error("Can't save screenshot due to " + e.getMessage());
         }
-        return screenshotFile;
     }
 
-    public void highlightElement(WebDriver driver, WebElement elementToHighlight) {
+    public static void highlightElement(WebDriver driver, WebElement elementToHighlight) {
         JavascriptExecutor jsExecutor = ((JavascriptExecutor) driver);
         String background = elementToHighlight.getCssValue("backgroundColor");
         jsExecutor.executeScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", elementToHighlight);
-        takeScreenshot();
+        takeScreenshot(driver);
         jsExecutor.executeScript("arguments[0].style.backgroundColor = '" + background + "'", elementToHighlight);
     }
 }

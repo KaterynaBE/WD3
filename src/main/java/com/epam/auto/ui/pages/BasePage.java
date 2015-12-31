@@ -1,6 +1,5 @@
 package com.epam.auto.ui.pages;
 
-import com.epam.auto.utils.ScreenshottingUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,7 +28,6 @@ public class BasePage {
     private WebElement linkSpam;
 
     protected WebDriver driver;
-    protected ScreenshottingUtils screenshottingUtils;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -50,9 +48,6 @@ public class BasePage {
     public SpamPage openSpamFolder() {
         expanderMoreLess.click();
         linkSpam.click();
-        // This scr will show what's inside Spam folder on that step.
-//        screenshottingUtils.highlightElement(driver, linkSpam);
-//        screenshottingUtils.takeScreenshot();
         return new SpamPage(driver);
     }
 }
