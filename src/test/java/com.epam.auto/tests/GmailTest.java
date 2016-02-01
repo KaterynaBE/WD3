@@ -17,7 +17,7 @@ import org.junit.Assert;
 
 
 /**
- * Gmail test - home work 3.
+ * Gmail test - task 3. To implement following test scenario:
  * 1. Login as registered user1
  * 2. Send message to user2
  * 3. Login as registered user2
@@ -31,9 +31,10 @@ import org.junit.Assert;
 
 public class GmailTest extends BaseTest {
     private final String USERNAME1 = "testtasktask@gmail.com";
-    private final String PASSWORD1 = "testtasktaskpwd";
+    // passwords are not correct here in purpose
+    private final String PASSWORD1 = "pwd";
     private final String USERNAME2 = "testtasktask2@gmail.com";
-    private final String PASSWORD2 = "testtasktaskpwd2";
+    private final String PASSWORD2 = "pwd2";
     private final String EMAIL_TITLE = "Email title ";
     private final String MESSAGE = "Some awesome text ";
 
